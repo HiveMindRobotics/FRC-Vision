@@ -303,6 +303,7 @@ public final class Main {
     @Override
     public void process(Mat mat) {
       var detections = detector.detect(mat);
+      System.out.println("Hi!");
       for (AprilTagDetection detection : detections) {
         System.out.println(detection.getId());
       }
