@@ -363,7 +363,8 @@ public final class Main {
     // loop forever
     for (;;) {
       try {
-        Thread.sleep(10000);
+        Thread.sleep(1000);
+        System.out.println("hi!");
       } catch (InterruptedException ex) {
         return;
       }
