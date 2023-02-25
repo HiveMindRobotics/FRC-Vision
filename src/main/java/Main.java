@@ -16,6 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import edu.wpi.first.apriltag.AprilTagDetection;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.MjpegServer;
 import edu.wpi.first.cscore.UsbCamera;
@@ -25,7 +26,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.vision.VisionThread;
 
+import edu.wpi.first.apriltag.AprilTagDetector;
+
 import org.opencv.core.Mat;
+import org.opencv.imgproc.Imgproc;
 
 /*
    JSON format:
@@ -287,12 +291,21 @@ public final class Main {
   /**
    * Example pipeline.
    */
-  public static class MyPipeline implements VisionPipeline {
+  public static class AprilTagsPipeline implements VisionPipeline {
     public int val;
+    private AprilTagDetector detector;
+    private Mat grey;
+
+    public AprilTagsPipeline() {
+      detector = new AprilTagDetector();
+    }
 
     @Override
     public void process(Mat mat) {
-      val += 1;
+      var detections = detector.detect(mat);
+      for (AprilTagDetection detection : detections) {
+        System.out.println(detection.getId());
+      }
     }
   }
 
@@ -334,7 +347,7 @@ public final class Main {
     // start image processing on camera 0 if present
     if (cameras.size() >= 1) {
       VisionThread visionThread = new VisionThread(cameras.get(0),
-              new MyPipeline(), pipeline -> {
+              new AprilTagsPipeline(), pipeline -> {
         // do something with pipeline results
       });
       /* something like this for GRIP:
