@@ -313,7 +313,7 @@ public final class Main {
   /**
    * Main.
    */
-  public static void main(String... args) {
+  public static void main(String... args) throws Exception {
     if (args.length > 0) {
       configFile = args[0];
     }
@@ -358,6 +358,8 @@ public final class Main {
       });
        */
       visionThread.start();
+    } else {
+      throw new Exception("AAA");
     }
 
     // loop forever
