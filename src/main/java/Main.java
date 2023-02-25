@@ -306,6 +306,7 @@ public final class Main {
       System.out.println("Hi!");
       for (AprilTagDetection detection : detections) {
         System.out.println(detection.getId());
+        val = detection.getId();
       }
     }
   }
@@ -349,7 +350,7 @@ public final class Main {
     if (cameras.size() >= 1) {
       VisionThread visionThread = new VisionThread(cameras.get(0),
               new AprilTagsPipeline(), pipeline -> {
-        // do something with pipeline results
+        System.out.println(pipeline.val);
       });
       /* something like this for GRIP:
       VisionThread visionThread = new VisionThread(cameras.get(0),
@@ -358,8 +359,6 @@ public final class Main {
       });
        */
       visionThread.start();
-    } else {
-      throw new Exception("AAA");
     }
 
     // loop forever
