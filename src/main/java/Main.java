@@ -349,17 +349,19 @@ public final class Main {
 
     // start image processing on camera 0 if present
     if (cameras.size() >= 1) {
-      VisionThread visionThread = new VisionThread(cameras.get(0),
-              new AprilTagsPipeline(), pipeline -> {
-        System.out.println(pipeline.val);
-      });
+      for (var camera : cameras) {
+        VisionThread visionThread = new VisionThread(camera,
+                new AprilTagsPipeline(), pipeline -> {
+          System.out.println(pipeline.val);
+        });
       /* something like this for GRIP:
       VisionThread visionThread = new VisionThread(cameras.get(0),
               new GripPipeline(), pipeline -> {
         ...
       });
        */
-      visionThread.start();
+        visionThread.start();
+      }
     }
 
     // loop forever
