@@ -298,6 +298,7 @@ public final class Main {
 
     public AprilTagsPipeline() {
       detector = new AprilTagDetector();
+      detector.addFamily("16h5");
     }
 
     @Override
