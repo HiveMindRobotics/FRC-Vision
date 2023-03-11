@@ -298,13 +298,11 @@ public final class Main {
     public AprilTagsPipeline() {
       detector = new AprilTagDetector();
       detector.addFamily("tag16h5");
-      System.out.println();
     }
 
     @Override
     public void process(Mat mat) {
       var detections = detector.detect(mat);
-      System.out.println("Hi!");
       for (AprilTagDetection detection : detections) {
         System.out.println(detection.getId());
         val = detection.getId();
@@ -352,7 +350,6 @@ public final class Main {
       for (var camera : cameras) {
         VisionThread visionThread = new VisionThread(camera,
                 new AprilTagsPipeline(), pipeline -> {
-          System.out.println(pipeline.val);
         });
       /* something like this for GRIP:
       VisionThread visionThread = new VisionThread(cameras.get(0),
@@ -368,7 +365,6 @@ public final class Main {
     for (;;) {
       try {
         Thread.sleep(1000);
-        System.out.println("hi!");
       } catch (InterruptedException ex) {
         return;
       }
