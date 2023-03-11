@@ -287,7 +287,6 @@ public final class Main {
 
     return server;
   }
-
   /**
    * Example pipeline.
    */
@@ -298,8 +297,8 @@ public final class Main {
 
     public AprilTagsPipeline() {
       detector = new AprilTagDetector();
-      detector.addFamily("16h5");
-      System.out.println("16h5");
+      detector.addFamily("tag16h5");
+      System.out.println();
     }
 
     @Override
