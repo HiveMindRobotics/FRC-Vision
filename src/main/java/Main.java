@@ -304,7 +304,7 @@ public final class Main {
     public void process(Mat mat) {
       var detections = detector.detect(mat);
       for (AprilTagDetection detection : detections) {
-        System.out.println(detection.getId());
+        System.out.println(detection.toString());
         val = detection.getId();
       }
     }
